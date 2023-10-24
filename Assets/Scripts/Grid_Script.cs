@@ -15,16 +15,14 @@ public class Grid_Script : MonoBehaviour
         int incriment = 0;
         //change scale of grid
         squarePrefab.transform.localScale = new Vector3(scale, scale, scale);
+        
 
-        //find middle of grid
-        float middle = (float)gridSize / 2f;
-        //move grid to middle
-        transform.position = new Vector3(-middle, -middle, 0);
+   
 
-
-        for (int x = 0; x < gridSize; x++)
+        for (float x = 0 - (gridSize / 2) * scale + 1; x < gridSize/2; x++)
         {
-            for (int y = 0; y < gridSize; y++)
+            print(x);
+            for (float y = 0 - (gridSize / 2) * scale + 1; y < gridSize/2; y++)
             {
                 //convert x and y to floats
                 float xFloat = (float)x * scale;
