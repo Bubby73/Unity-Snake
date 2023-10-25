@@ -7,29 +7,32 @@ public class Grid_Script : MonoBehaviour
 
     public int gridSize = 11;
     public GameObject squarePrefab;
-    public float scale = 1f;
+
+    //get screen height
+    float screenHeight = 10;
+    
+    
+
 
     // Start is called before the first frame update
     void Start()
     {
         int incriment = 0;
+        float squareSize = screenHeight / gridSize;
         //change scale of grid
-        squarePrefab.transform.localScale = new Vector3(scale, scale, scale);
+        squarePrefab.transform.localScale = new Vector3(squareSize, squareSize, squareSize);
         
 
-   
-
-        for (float x = 0 - (gridSize / 2) * scale + 1; x < gridSize/2; x++)
+        for (float x = 0 - (gridSize / 2) + 1; x < gridSize/2; x++)
         {
-            print(x);
-            for (float y = 0 - (gridSize / 2) * scale + 1; y < gridSize/2; y++)
+            for (float y = 0 - (gridSize / 2) + 1; y < gridSize/2; y++)
             {
-                //convert x and y to floats
-                float xFloat = (float)x * scale;
-                float yFloat = (float)y * scale;
+                //adjust x and y values so squares are togeather
+                float xAdjust = -x * (squareSize / 2);
+                float yAdjust = -y * (squareSize / 2);
 
                 //create cube from prefab
-                GameObject square = Instantiate(squarePrefab, new Vector3(xFloat, yFloat, 0), Quaternion.identity);
+                GameObject square = Instantiate(squarePrefab, new Vector3(xAdjust, yAdjust, 0), Quaternion.identity);
                 //make every other cube black
                 if (incriment % 2 == 0)
                 {
