@@ -154,7 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridSize: 11
   squarePrefab: {fileID: 2820885848121730735, guid: 8724f1e8113de9f4ba4a915d22a55473, type: 3}
-  scale: 1
 --- !u!4 &1134371837
 Transform:
   m_ObjectHideFlags: 0

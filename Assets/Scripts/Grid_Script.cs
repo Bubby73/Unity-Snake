@@ -9,8 +9,13 @@ public class Grid_Script : MonoBehaviour
     public GameObject squarePrefab;
 
     //get screen height
-    float screenHeight = 10;
-    
+
+    //new 2d array to hold square coords
+
+
+    //new array
+    public int[] squareArr = new int[gridSize, gridSize];
+
     
 
 
@@ -18,9 +23,9 @@ public class Grid_Script : MonoBehaviour
     void Start()
     {
         int incriment = 0;
-        float squareSize = screenHeight / gridSize;
+        float stepSize = 10f / gridSize;
         //change scale of grid
-        squarePrefab.transform.localScale = new Vector3(squareSize, squareSize, squareSize);
+        squarePrefab.transform.localScale = new Vector3(stepSize, stepSize, stepSize);
         
 
         for (float x = 0 - (gridSize / 2) + 1; x < gridSize/2; x++)
@@ -28,8 +33,8 @@ public class Grid_Script : MonoBehaviour
             for (float y = 0 - (gridSize / 2) + 1; y < gridSize/2; y++)
             {
                 //adjust x and y values so squares are togeather
-                float xAdjust = -x * (squareSize / 2);
-                float yAdjust = -y * (squareSize / 2);
+                float xAdjust = x * stepSize;
+                float yAdjust = y * stepSize;
 
                 //create cube from prefab
                 GameObject square = Instantiate(squarePrefab, new Vector3(xAdjust, yAdjust, 0), Quaternion.identity);
@@ -43,9 +48,17 @@ public class Grid_Script : MonoBehaviour
                     square.GetComponent<Renderer>().material.color = new Color(17/255f, 186/255f, 22/255f);
                 }
 
+                //add cube coords to array
+                squareArr[incriment, 0] = x;
+                squareArr[incriment, 1] = y;
+                
+
+
                 incriment++;
             }
         }
+        print(squareArr);
+
 
     }
 
