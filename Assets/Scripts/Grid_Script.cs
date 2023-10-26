@@ -13,8 +13,6 @@ public class Grid_Script : MonoBehaviour
     //new 2d array to hold square coords
 
 
-    //new array
-    //public int[] squareArr = new int[gridSize, gridSize];
 
 
 
@@ -24,6 +22,8 @@ public class Grid_Script : MonoBehaviour
     {
         int incriment = 0;
         float stepSize = 10f / gridSize;
+        float[,] gridArr = new float[(gridSize ^ 2), 2];
+
         //change scale of grid
         squarePrefab.transform.localScale = new Vector3(stepSize, stepSize, stepSize);
 
@@ -48,13 +48,19 @@ public class Grid_Script : MonoBehaviour
                     square.GetComponent<Renderer>().material.color = new Color(17/255f, 186/255f, 22/255f);
                 }
 
-             
+                //add cube coords to array
+                gridArr[incriment, 0] = xAdjust;
+                gridArr[incriment, 1] = yAdjust;
+                
+   
 
 
 
                 incriment++;
             }
         }
+        print(gridArr[2, 1]);
+        
 
 
 
