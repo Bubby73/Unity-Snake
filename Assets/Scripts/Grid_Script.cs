@@ -14,9 +14,9 @@ public class Grid_Script : MonoBehaviour
 
 
     //new array
-    public int[] squareArr = new int[gridSize, gridSize];
+    //public int[] squareArr = new int[gridSize, gridSize];
 
-    
+
 
 
     // Start is called before the first frame update
@@ -26,7 +26,7 @@ public class Grid_Script : MonoBehaviour
         float stepSize = 10f / gridSize;
         //change scale of grid
         squarePrefab.transform.localScale = new Vector3(stepSize, stepSize, stepSize);
-        
+
 
         for (float x = 0 - (gridSize / 2) + 1; x < gridSize/2; x++)
         {
@@ -48,16 +48,14 @@ public class Grid_Script : MonoBehaviour
                     square.GetComponent<Renderer>().material.color = new Color(17/255f, 186/255f, 22/255f);
                 }
 
-                //add cube coords to array
-                squareArr[incriment, 0] = x;
-                squareArr[incriment, 1] = y;
-                
+             
+
 
 
                 incriment++;
             }
         }
-        print(squareArr);
+
 
 
     }
@@ -65,6 +63,6 @@ public class Grid_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-   
+
     }
 }
