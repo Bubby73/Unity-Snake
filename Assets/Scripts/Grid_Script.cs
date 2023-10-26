@@ -10,11 +10,20 @@ public class Grid_Script : MonoBehaviour
 
     private int direction = 1; //0 = up, 1 = right, 2 = down, 3 = left
 
+    private int currentCube = 0; //current cube number
+
+    private int score = 1;
+
     void Start()
     {
+
+        if (gridSize % 2 == 0) //if grid size is even, make it odd
+        {
+            gridSize++;
+        }
+
         int incriment = 0;
         float stepSize = 10f / gridSize;
-        float[,] gridArr = new float[(gridSize * gridSize), 2];
 
 
 
@@ -22,9 +31,9 @@ public class Grid_Script : MonoBehaviour
         squarePrefab.transform.localScale = new Vector3(stepSize, stepSize, stepSize);
 
         //generate grid
-        for (float x = 0 - (gridSize / 2) + 1; x < gridSize/2; x++)
+        for (float x = 0 - (gridSize / 2); x < gridSize/2 + 1; x++)
         {
-            for (float y = 0 - (gridSize / 2) + 1; y < gridSize/2; y++)
+            for (float y = 0 - (gridSize / 2); y < gridSize/2 + 1; y++)
             {
                 //adjust x and y values so squares are togeather
                 float xAdjust = x * stepSize;
@@ -44,14 +53,12 @@ public class Grid_Script : MonoBehaviour
                 }
 
                 //add cube coords to array
-                gridArr[incriment, 0] = xAdjust;
-                gridArr[incriment, 1] = yAdjust;
+                //gridArr[incriment, 0] = xAdjust;
+                //gridArr[incriment, 1] = yAdjust;
                 
-                //save cube to array
                 square.name = "Cube " + incriment;
-
-
                 incriment++; //next cube
+                
             }
         }
 
@@ -60,15 +67,76 @@ public class Grid_Script : MonoBehaviour
 
     void Update()
     {
-        //change random square colour to red
-        for (int i = 0; i < (gridSize * gridSize); i++)
+        //set current cube to red
+        GameObject.Find("Cube " + currentCube).GetComponent<Renderer>().material.color = Color.red;
+        float[] snakeArr = new float[(gridSize * gridSize)];
+
+        //take arrow key input
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            int r = Random.Range(0, 255);
-            int g = Random.Range(0, 255);
-            int b = Random.Range(0, 255);
-            GameObject.Find("Cube " + i).GetComponent<Renderer>().material.color = new Color(r/255f, g/255f, b/255f);
+            direction = 0;
         }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            direction = 1;
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            direction = 2;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            direction = 3;
+        }
+
+        //move cube
+        if (direction == 0)
+        {
+            if (currentCube + 1 < gridSize * gridSize)
+            {
+                currentCube ++;
+            }
+        }
+        else if (direction == 1)
+        {
+            if (currentCube + gridSize < gridSize * gridSize)
+            {
+                currentCube = currentCube + gridSize;
+            }
+        }
+        else if (direction == 2)
+        {
+            if (currentCube - 1 >= 0)
+            {
+                currentCube --;
+            }
+        }
+        else if (direction == 3)
+        {
+            if (currentCube - gridSize >= 0)
+            {
+                currentCube = currentCube - gridSize;
+            }
+        }
+
+        for (int i = 0; i <= score; i++)
+        {
+            snakeArr[i] = currentCube;
+            if (i > 0)
+            {
+                GameObject.Find("Cube " + (snakeArr[i - 1])).GetComponent<Renderer>().material.color = Color.green;
+            }
+            print(i);
+            //GameObject.Find("Cube " + (snakeArr[i])).GetComponent<Renderer>().material.color = Color.green;
+
+        }
+
+        //set cube in array behind current cube to green
+
 
 
     }
+        
+
+
 }
