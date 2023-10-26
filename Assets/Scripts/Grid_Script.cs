@@ -13,16 +13,12 @@ public class Grid_Script : MonoBehaviour
     //new 2d array to hold square coords
 
 
-
-
-
-
     // Start is called before the first frame update
     void Start()
     {
         int incriment = 0;
         float stepSize = 10f / gridSize;
-        float[,] gridArr = new float[(gridSize ^ 2), 2];
+        float[,] gridArr = new float[(gridSize * gridSize), 2];
 
         //change scale of grid
         squarePrefab.transform.localScale = new Vector3(stepSize, stepSize, stepSize);
