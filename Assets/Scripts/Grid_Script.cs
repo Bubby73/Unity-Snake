@@ -14,6 +14,12 @@ public class Grid_Script : MonoBehaviour
 
     private int score = 1;
 
+    //set fps to 10
+    void Awake()
+    {
+        Application.targetFrameRate = 3;
+    }
+
     void Start()
     {
 
@@ -68,7 +74,7 @@ public class Grid_Script : MonoBehaviour
     void Update()
     {
         //set current cube to red
-        GameObject.Find("Cube " + currentCube).GetComponent<Renderer>().material.color = Color.red;
+        GameObject.Find("Cube " + currentCube).GetComponent<Renderer>().material.color = Color.green;
         float[] snakeArr = new float[(gridSize * gridSize)];
 
         //take arrow key input
@@ -118,20 +124,33 @@ public class Grid_Script : MonoBehaviour
                 currentCube = currentCube - gridSize;
             }
         }
+        else
+        {
+            print("error");
+        }
 
         for (int i = 0; i <= score; i++)
         {
             snakeArr[i] = currentCube;
             if (i > 0)
             {
-                GameObject.Find("Cube " + (snakeArr[i - 1])).GetComponent<Renderer>().material.color = Color.green;
+                GameObject.Find("Cube " + (snakeArr[i - 1])).GetComponent<Renderer>().material.color = Color.red;
             }
-            print(i);
+            else
+            {
+
+                GameObject.Find("Cube " + (snakeArr[i])).GetComponent<Renderer>().material.color = Color.green;
+            }
             //GameObject.Find("Cube " + (snakeArr[i])).GetComponent<Renderer>().material.color = Color.green;
 
         }
+        
+        print(currentCube);
 
         //set cube in array behind current cube to green
+
+        
+
 
 
 
