@@ -12,7 +12,7 @@ public class Grid_Script : MonoBehaviour
 
     private int currentCube = 0; //current cube number
 
-    private int score = 1;
+    public int score = 1;
 
     //set fps to 10
     void Awake()
